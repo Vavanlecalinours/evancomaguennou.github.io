@@ -240,22 +240,22 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="info-card">
+    <a href="#parcours" class="info-card" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
       <div class="info-icon">🎓</div>
       <div><div class="info-label">Formation</div><div class="info-value">BUT GMP — Parcours Innovation</div></div>
-    </div>
-    <div class="info-card">
+    </a>
+    <a href="#experiences" class="info-card" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
       <div class="info-icon">🏭</div>
       <div><div class="info-label">Alternance</div><div class="info-value">PA.COTTE — Luxe &amp; Conception</div></div>
-    </div>
-    <div class="info-card">
+    </a>
+    <a href="#contact" class="info-card" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
       <div class="info-icon">📍</div>
       <div><div class="info-label">Localisation</div><div class="info-value">Nantes, Pays de la Loire</div></div>
-    </div>
-    <div class="info-card">
+    </a>
+    <a href="#interets" class="info-card" style="text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
       <div class="info-icon">⌚</div>
       <div><div class="info-label">Passion</div><div class="info-value">Horlogerie &amp; Industrie du luxe</div></div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -317,9 +317,9 @@
     <div class="skill-category">
       <div class="skill-icon">🌍</div>
       <div class="skill-cat-title">Langues & Certifications</div>
-      <div class="skill-item"><div class="skill-row"><span class="skill-name">Anglais — TOEIC B2</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Anglais — TOEIC 795/990 (B2)</span><span class="skill-pct">795/990</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
       <div class="skill-item"><div class="skill-row"><span class="skill-name">Espagnol — Niveau A2</span><span class="skill-pct">40%</span></div><div class="skill-bar"><div class="skill-fill" data-width="40"></div></div></div>
-      <div class="skill-item"><div class="skill-row"><span class="skill-name">Certification Voltaire (français)</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Certification Voltaire (français)</span><span class="skill-pct">2025</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
     </div>
     <div class="skill-category">
       <div class="skill-icon">🤝</div>
@@ -329,6 +329,27 @@
       <div class="skill-item"><div class="skill-row"><span class="skill-name">Certification Pix</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
     </div>
   </div>
+
+  <!-- Badges certifications -->
+  <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.8rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="font-size:2rem;">🏅</div>
+      <div>
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem;">TOEIC — Janvier 2026</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;line-height:1;">795 <span style="font-size:0.9rem;color:var(--ink-muted);font-weight:400;">/ 990</span></div>
+        <div style="font-size:0.8rem;color:var(--ink-muted);margin-top:0.2rem;">Niveau B2 · Listening 410 · Reading 385</div>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.8rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="font-size:2rem;">📝</div>
+      <div>
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.2rem;">Certification Voltaire — 2025</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;line-height:1;">Orthographe &amp; Grammaire</div>
+        <div style="font-size:0.8rem;color:var(--ink-muted);margin-top:0.2rem;">Maîtrise du français écrit professionnel</div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- EXPÉRIENCES -->
@@ -410,6 +431,16 @@
         <div class="project-title">Porte-vélo</div>
         <p class="project-desc">Conception d'un système de porte-vélo. Étude des charges, choix des matériaux et validation de la résistance mécanique de la structure.</p>
         <div class="tl-tags" style="margin-top:0.8rem"><span class="tag">Structure</span><span class="tag">Matériaux</span><span class="tag">Prototypage</span></div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb" style="background:#D8DDE0;"><img src="rack-palette.png" alt="Rack de stockage palette europe" style="width:100%;height:100%;object-fit:cover;" /></div>
+      <div class="project-body">
+        <div class="project-type">Conception industrielle — PA.COTTE</div>
+        <div class="project-title">Rack de stockage sur palette europe</div>
+        <p class="project-desc">Conception d'un rack modulaire destiné au stockage de blocs d'aluminium de différentes tailles, monté sur palette europe (1200×800 mm). Structure composée de plaques de séparation, plaque fond et plaques dessus/dessous, assemblées par vis CHC M8.</p>
+        <div class="tl-tags" style="margin-top:0.8rem"><span class="tag">Conception</span><span class="tag">Stockage</span><span class="tag">Aluminium</span><span class="tag">SolidWorks</span><span class="tag">PA.COTTE</span></div>
+
       </div>
     </div>
   </div>
