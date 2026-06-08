@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stockage matières FabLab — Evan COMA-GUENNOU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F5F3EF; --surface: #ECEAE4; --ink: #1A1916;
+      --ink-muted: #6B6860; --accent: #C4440A; --accent-light: #F5EDE8;
+      --line: #D4D0C8; --white: #FAFAF8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,243,239,0.94); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw; height: 62px;
+    }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back { font-size: 0.85rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    /* HERO */
+    .page-hero {
+      padding: 100px 6vw 0; background: var(--surface);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; min-height: 70vh;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 22px, var(--line) 22px, var(--line) 23px);
+      opacity: 0.3;
+    }
+    .hero-left { position: relative; z-index: 1; padding-bottom: 60px; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 1.2rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .page-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 0.28rem 0.8rem; border-radius: 2px; margin-bottom: 1rem; }
+    .page-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 3rem); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+    .page-desc { font-size: 0.95rem; color: var(--ink-muted); max-width: 480px; line-height: 1.75; margin-bottom: 1.5rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .meta-badge { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; background: var(--white); border: 1px solid var(--line); padding: 0.35rem 0.8rem; border-radius: 4px; }
+    .hero-right { position: relative; z-index: 1; align-self: stretch; display: flex; align-items: flex-end; }
+    .hero-img { width: 100%; max-height: 440px; object-fit: cover; object-position: center; display: block; border-radius: 8px 8px 0 0; box-shadow: 0 -8px 40px rgba(26,25,22,0.12); }
+
+    /* CONTENT */
+    .content { max-width: 900px; margin: 0 auto; padding: 60px 6vw; }
+    .block { margin-bottom: 3.5rem; }
+    .block-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.4rem; }
+    .block-bar { width: 30px; height: 3px; background: var(--accent); margin-bottom: 1.5rem; }
+
+    /* GALERIE */
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); cursor: pointer; transition: transform 0.2s; }
+    .gallery-grid img:hover { transform: scale(1.02); }
+    .gallery-grid img.wide { grid-column: span 2; aspect-ratio: 16/6; object-fit: cover; }
+
+    /* CONTEXTE */
+    .context-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; }
+    .context-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 1.4rem; }
+    .context-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .context-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+    .context-sub { font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.2rem; }
+
+    /* ÉTAPES */
+    .steps { display: flex; flex-direction: column; gap: 1.2rem; }
+    .step { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .step-desc { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.65; }
+
+    /* KANBAN */
+    .kanban-demo { display: flex; flex-direction: column; gap: 0.6rem; max-width: 420px; }
+    .kanban-row { display: flex; align-items: center; gap: 0.8rem; }
+    .kanban-arrow { width: 28px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 3px; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .kanban-arrow.red { background: #DC2626; color: white; }
+    .kanban-label { background: var(--ink); color: var(--white); font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 3px; min-width: 120px; text-align: center; }
+    .kanban-mat { font-size: 0.85rem; color: var(--ink-muted); }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag { font-size: 0.72rem; font-weight: 600; background: var(--accent-light); color: var(--accent); padding: 0.22rem 0.65rem; border-radius: 3px; }
+
+    /* NAV PROJETS */
+    .projects-nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-top: 1px solid var(--line); }
+    .proj-nav-btn { font-size: 0.875rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+    .proj-nav-btn:hover { color: var(--accent); }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 999; align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 4px; }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 1.5rem; color: white; font-size: 2rem; cursor: pointer; }
+
+    footer { background: var(--ink); color: #605C56; text-align: center; padding: 1.5rem 6vw; font-size: 0.8rem; }
+    footer span { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .page-hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid img.wide { grid-column: span 1; aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Evan <span>CG</span></a>
+  <a href="index.html#projets" class="nav-back">← Retour aux projets</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-left">
+    <div class="breadcrumb">
+      <a href="index.html">Portfolio</a> › <a href="index.html#projets">Projets</a> › Stockage matières FabLab
+    </div>
+    <div class="page-tag">Méthodes & Industrialisation · PA.COTTE FabLab</div>
+    <h1 class="page-title">Rangement stock<br>matières FabLab</h1>
+    <p class="page-desc">Conception d'un système de rangement modulaire pour le stock de contreplaqué, carton et plexiglas, avec étiquetage kanban bicolore et pièces de maintien imprimées en 3D.</p>
+    <div class="hero-meta">
+      <div class="meta-badge">📅 2024 – 2025</div>
+      <div class="meta-badge">🏭 PA.COTTE FabLab</div>
+      <div class="meta-badge">🖨️ Impression 3D</div>
+      <div class="meta-badge">📋 Système Kanban</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="stockage-reel-1.jpg" alt="Rangement stock matières FabLab" class="hero-img" />
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- GALERIE RÉELLE -->
+  <div class="block">
+    <div class="block-title">Photos du système en place</div>
+    <div class="block-bar"></div>
+    <div class="gallery-grid">
+      <img src="stockage-reel-1.jpg" alt="Étiquetage kanban sur le rack" onclick="openLightbox(this.src)" />
+      <img src="stockage-reel-2.jpg" alt="Vue d'ensemble du stock" onclick="openLightbox(this.src)" />
+    </div>
+  </div>
+
+  <!-- GALERIE 3D -->
+  <div class="block">
+    <div class="block-title">Conception 3D</div>
+    <div class="block-bar"></div>
+    <div class="gallery-grid">
+      <img src="stockage-vue-generale.png" alt="Vue générale du rack 3D" class="wide" onclick="openLightbox(this.src)" />
+      <img src="stockage-detail-etagere.png" alt="Détail étagère inclinée" onclick="openLightbox(this.src)" />
+      <img src="stockage-detail-piece.png" alt="Détail pièce de connexion" onclick="openLightbox(this.src)" />
+      <img src="stockage-piece-3d-1.png" alt="Pièce imprimée 3D — support" onclick="openLightbox(this.src)" />
+      <img src="stockage-piece-3d-2.png" alt="Pièce imprimée 3D — vue 2" onclick="openLightbox(this.src)" />
+      <img src="stockage-etiquette-kanban.png" alt="Étiquette kanban bicolore" onclick="openLightbox(this.src)" />
+    </div>
+  </div>
+
+  <!-- CONTEXTE -->
+  <div class="block">
+    <div class="block-title">Contexte du projet</div>
+    <div class="block-bar"></div>
+    <div class="context-grid">
+      <div class="context-card">
+        <div class="context-label">Lieu</div>
+        <div class="context-value">FabLab PA.COTTE</div>
+        <div class="context-sub">Sainte-Luce-sur-Loire</div>
+      </div>
+      <div class="context-card">
+        <div class="context-label">Objectif</div>
+        <div class="context-value">Organiser le stock</div>
+        <div class="context-sub">Contreplaqué, carton, plexiglas — par épaisseur</div>
+      </div>
+      <div class="context-card">
+        <div class="context-label">Structure</div>
+        <div class="context-value">Rail aluminium</div>
+        <div class="context-sub">Étagères inclinées avec pièces 3D de maintien</div>
+      </div>
+      <div class="context-card">
+        <div class="context-label">Gestion</div>
+        <div class="context-value">Système Kanban</div>
+        <div class="context-sub">Étiquettes bicolores noir/rouge glissantes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="block">
+    <div class="block-title">Description technique</div>
+    <div class="block-bar"></div>
+    <p style="font-size:0.95rem;color:var(--ink-muted);line-height:1.8;max-width:680px;">
+      Le système de rangement est composé d'étagères inclinées montées sur des rails en profilé aluminium. Des pièces de maintien imprimées en 3D (PLA), dotées d'encoches et de trous oblongs, permettent de fixer solidement les planches servant d'étagères tout en autorisant un réglage précis de la hauteur par vissage sur le rail. Chaque niveau correspond à une épaisseur de matière (1,2 mm, 1,6 mm, 2,5 mm, 3 mm, 3,6 mm, 5 mm, 10 mm). Le système d'étiquetage kanban utilise des porte-étiquettes bicolores noir/rouge qui se glissent dans le rail aluminium — la flèche rouge visible indique le niveau de réapprovisionnement à déclencher.
+    </p>
+  </div>
+
+  <!-- SYSTÈME KANBAN -->
+  <div class="block">
+    <div class="block-title">Système d'étiquetage Kanban</div>
+    <div class="block-bar"></div>
+    <p style="font-size:0.9rem;color:var(--ink-muted);margin-bottom:1.4rem;line-height:1.7;">Chaque niveau du rack est identifié par une étiquette glissée dans le rail aluminium. L'étiquette bicolore noir/rouge indique le matériau et son épaisseur. Lorsque le stock descend sous le seuil, la flèche rouge devient visible — signal visuel immédiat pour déclencher le réapprovisionnement.</p>
+    <div class="kanban-demo">
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 1.2 mm</div><div class="kanban-mat">Contreplaqué fin</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 1.6 mm</div><div class="kanban-mat">Contreplaqué</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 2.5 mm</div><div class="kanban-mat">Contreplaqué</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 3 mm</div><div class="kanban-mat">Contreplaqué</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 3.6 mm</div><div class="kanban-mat">Contreplaqué</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 5 mm</div><div class="kanban-mat">Contreplaqué</div></div>
+      <div class="kanban-row"><div class="kanban-arrow red">←</div><div class="kanban-label">BOIS 10 mm</div><div class="kanban-mat">Contreplaqué épais</div></div>
+    </div>
+  </div>
+
+  <!-- DÉMARCHE -->
+  <div class="block">
+    <div class="block-title">Démarche</div>
+    <div class="block-bar"></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Analyse de l'existant</div>
+          <div class="step-desc">État des lieux du stock matières du FabLab : matériaux mélangés, sans identification claire, difficiles à retrouver. Identification des besoins avec les utilisateurs.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Conception du rack sur SolidWorks</div>
+          <div class="step-desc">Modélisation de la structure avec profilés aluminium et étagères inclinées. Conception des pièces de maintien avec encoches et trous oblongs pour fixation sur rail et réglage en hauteur.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Impression 3D des pièces de maintien</div>
+          <div class="step-desc">Fabrication des pièces en PLA sur l'imprimante 3D du FabLab. Les trous oblongs permettent un ajustement précis de la position des étagères sur le rail aluminium.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Mise en place du système Kanban</div>
+          <div class="step-desc">Conception des porte-étiquettes bicolores (noir/rouge) s'insérant dans le profilé aluminium. Chaque étiquette indique la matière et l'épaisseur. La flèche rouge visible signale le seuil de réapprovisionnement.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Déploiement & méthode 5S</div>
+          <div class="step-desc">Mise en place du rangement dans le FabLab, tri et classement de toutes les matières par type et épaisseur. Application de la méthode 5S pour garantir la pérennité du système.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPÉTENCES -->
+  <div class="block">
+    <div class="block-title">Compétences mobilisées</div>
+    <div class="block-bar"></div>
+    <div class="tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">Impression 3D</span>
+      <span class="tag">Profilé aluminium</span>
+      <span class="tag">Système Kanban</span>
+      <span class="tag">Méthode 5S</span>
+      <span class="tag">Amélioration continue</span>
+      <span class="tag">Gestion de stock</span>
+      <span class="tag">FabLab</span>
+      <span class="tag">PA.COTTE</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="projects-nav">
+    <a href="boite-epi.html" class="proj-nav-btn">← Boîtes EPI</a>
+    <a href="index.html#projets" class="proj-nav-btn">Tous les projets</a>
+    <a href="rack-palette.html" class="proj-nav-btn">Rack palette →</a>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<footer>
+  <p>© 2025 <span>Evan COMA-GUENNOU</span> · BUT GMP · IUT de Carquefou</p>
+</footer>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
