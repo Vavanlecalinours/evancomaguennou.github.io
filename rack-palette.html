@@ -149,6 +149,16 @@
 <!-- CONTENT -->
 <div class="content">
 
+  <!-- GALERIE -->
+  <div class="block">
+    <div class="block-title">Rendus 3D</div>
+    <div class="block-bar"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <img src="rack-palette.png" alt="Rack de stockage — vue 1" style="width:100%;border-radius:8px;border:1px solid var(--line);cursor:pointer;transition:transform 0.2s;" onclick="openLightbox(this.src)" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" />
+      <img src="rack-palette-v2.png" alt="Rack de stockage — vue 2" style="width:100%;border-radius:8px;border:1px solid var(--line);cursor:pointer;transition:transform 0.2s;" onclick="openLightbox(this.src)" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" />
+    </div>
+  </div>
+
   <!-- CONTEXTE -->
   <div class="block">
     <div class="block-title">Contexte du projet</div>
@@ -278,9 +288,27 @@
 
 </div>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center;">
+  <span onclick="closeLightbox()" style="position:absolute;top:1.5rem;right:1.5rem;color:white;font-size:2rem;cursor:pointer;">✕</span>
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;" />
+</div>
+
 <footer>
   <p>© 2025 <span>Evan COMA-GUENNOU</span> · BUT GMP · IUT de Carquefou</p>
 </footer>
+
+<script>
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    lb.style.display = 'flex';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
